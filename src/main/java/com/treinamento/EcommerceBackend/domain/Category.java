@@ -1,10 +1,17 @@
 package com.treinamento.EcommerceBackend.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -14,16 +21,24 @@ public class Category implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String nome;
+    private String name;
+
+
+    @ManyToMany(mappedBy = "categoryList")
+    List<Product> produtoList = new ArrayList<>();
 
     public Category() {
     }
 
     public Category(Integer id, String nome) {
         this.id = id;
-        this.nome = nome;
+        this.name = nome;
     }
 
+    @JsonIgnore
+    public List<Product> getProdutoList() {
+        return produtoList;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -41,17 +56,17 @@ public class Category implements Serializable {
     @Override
     public String toString() {
         return "Category{" +
-                "nome='" + nome + '\'' +
+                "nome='" + name + '\'' +
                 ", id=" + id +
                 '}';
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getId() {
