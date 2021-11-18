@@ -1,8 +1,4 @@
-package com.treinamento.EcommerceBackend.domain;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+package com.treinamento.EcommerceBackend.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -18,7 +14,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Product implements Serializable {
+public class ProductEntity implements Serializable {
     private static final long serialVersionUID = 1;
 
     @Id
@@ -31,18 +27,18 @@ public class Product implements Serializable {
     @ManyToMany
     @JoinTable(name = "ProdutoCategoria", joinColumns = @JoinColumn(name = "ProdutoId"), foreignKey= @ForeignKey(name="FkProduto"),
             inverseJoinColumns = @JoinColumn(name = "CategoryId"), inverseForeignKey = @ForeignKey(name="FkCategoria"))
-    List<Category> categoryList = new ArrayList<>();
+    List<CategoryEntity> categoryList = new ArrayList<>();
 
-    public Product() {
+    public ProductEntity() {
     }
 
-    public Product(Integer id, String name, Double price) {
+    public ProductEntity(Integer id, String name, Double price) {
         this.id = id;
         this.name = name;
         this.price = price;
     }
 
-    public List<Category> getCategoryList() {
+    public List<CategoryEntity> getCategoryList() {
         return categoryList;
     }
 
@@ -84,7 +80,7 @@ public class Product implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Product produto = (Product) o;
+        ProductEntity produto = (ProductEntity) o;
         return Objects.equals(id, produto.id);
     }
 

@@ -1,8 +1,6 @@
-package com.treinamento.EcommerceBackend.domain;
+package com.treinamento.EcommerceBackend.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Category implements Serializable {
+public class CategoryEntity implements Serializable {
     private static final long serialVersionUID = 1;
 
     @Id
@@ -25,18 +23,18 @@ public class Category implements Serializable {
 
 
     @ManyToMany(mappedBy = "categoryList")
-    List<Product> produtoList = new ArrayList<>();
+    List<ProductEntity> produtoList = new ArrayList<>();
 
-    public Category() {
+    public CategoryEntity() {
     }
 
-    public Category(Integer id, String nome) {
+    public CategoryEntity(Integer id, String nome) {
         this.id = id;
         this.name = nome;
     }
 
     @JsonIgnore
-    public List<Product> getProdutoList() {
+    public List<ProductEntity> getProdutoList() {
         return produtoList;
     }
 
@@ -44,7 +42,7 @@ public class Category implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Category category = (Category) o;
+        CategoryEntity category = (CategoryEntity) o;
         return Objects.equals(id, category.id);
     }
 

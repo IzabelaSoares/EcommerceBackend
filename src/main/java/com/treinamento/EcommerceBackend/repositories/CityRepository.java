@@ -1,9 +1,9 @@
 package com.treinamento.EcommerceBackend.repositories;
 
-import com.treinamento.EcommerceBackend.entities.ProductEntity;
+import com.treinamento.EcommerceBackend.entities.CityEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductRepository extends JpaRepository<ProductEntity, Integer> {
+public interface CityRepository extends JpaRepository<CityEntity, Integer> {
 }

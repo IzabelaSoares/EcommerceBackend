@@ -1,6 +1,6 @@
 package com.treinamento.EcommerceBackend.services;
 
-import com.treinamento.EcommerceBackend.domain.Category;
+import com.treinamento.EcommerceBackend.entities.CategoryEntity;
 import com.treinamento.EcommerceBackend.repositories.CategoryRepository;
 import com.treinamento.EcommerceBackend.services.exceptions.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +15,12 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public List<Category> findAll(){
+    public List<CategoryEntity> findAll(){
         return categoryRepository.findAll();
     }
 
-    public Category findById(Integer id){
-        Optional<Category> user = categoryRepository.findById(id);
+    public CategoryEntity findById(Integer id){
+        Optional<CategoryEntity> user = categoryRepository.findById(id);
         return user.orElseThrow(() -> new DatabaseException(id));
     }
 
