@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class AddressEntity implements Serializable {
@@ -20,6 +22,8 @@ public class AddressEntity implements Serializable {
     private String code;
     private String complement;
 
-
     private ClientEntity client;
+
+
+
 }

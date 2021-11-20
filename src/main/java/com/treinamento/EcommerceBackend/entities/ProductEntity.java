@@ -23,7 +23,6 @@ public class ProductEntity implements Serializable {
     private String name;
     private Double price;
 
-
     @ManyToMany
     @JoinTable(name = "ProdutoCategoria", joinColumns = @JoinColumn(name = "ProdutoId"), foreignKey= @ForeignKey(name="FkProduto"),
             inverseJoinColumns = @JoinColumn(name = "CategoryId"), inverseForeignKey = @ForeignKey(name="FkCategoria"))
