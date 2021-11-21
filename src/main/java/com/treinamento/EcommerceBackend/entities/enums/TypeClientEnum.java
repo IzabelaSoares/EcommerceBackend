@@ -21,7 +21,7 @@ public enum TypeClientEnum {
         return description;
     }
 
-    public static TypeClientEnum codigoParaEnum(Integer codigo) {
+    public static TypeClientEnum toEnum(Integer codigo) {
         if (codigo == null) {
             return null;
         }

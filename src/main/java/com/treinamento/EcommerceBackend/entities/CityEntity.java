@@ -7,10 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
+@Table(name = "City")
 public class CityEntity implements Serializable {
     private static final long serialVersionUID = 1;
 
@@ -26,8 +28,8 @@ public class CityEntity implements Serializable {
     public CityEntity() {
     }
 
-    public CityEntity(Integer id, String name, StateEntity state) {
-        this.id = id;
+    public CityEntity(String name, StateEntity state) {
+        this.id = null;
         this.name = name;
         this.state = state;
     }

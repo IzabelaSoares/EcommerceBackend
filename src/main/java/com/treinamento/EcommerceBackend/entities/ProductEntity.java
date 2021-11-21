@@ -8,12 +8,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name = "Product")
 public class ProductEntity implements Serializable {
     private static final long serialVersionUID = 1;
 
@@ -24,15 +26,15 @@ public class ProductEntity implements Serializable {
     private Double price;
 
     @ManyToMany
-    @JoinTable(name = "ProdutoCategoria", joinColumns = @JoinColumn(name = "ProdutoId"), foreignKey= @ForeignKey(name="FkProduto"),
-            inverseJoinColumns = @JoinColumn(name = "CategoryId"), inverseForeignKey = @ForeignKey(name="FkCategoria"))
+    @JoinTable(name = "ProdutoCategoria", joinColumns = @JoinColumn(name = "IdProduct"), foreignKey= @ForeignKey(name="FkProduct"),
+            inverseJoinColumns = @JoinColumn(name = "IdCategory"), inverseForeignKey = @ForeignKey(name="FkCategory"))
     List<CategoryEntity> categoryList = new ArrayList<>();
 
     public ProductEntity() {
     }
 
-    public ProductEntity(Integer id, String name, Double price) {
-        this.id = id;
+    public ProductEntity( String name, Double price) {
+        this.id = null;
         this.name = name;
         this.price = price;
     }

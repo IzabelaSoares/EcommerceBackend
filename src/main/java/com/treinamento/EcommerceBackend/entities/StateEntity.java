@@ -5,12 +5,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name = "State")
 public class StateEntity implements Serializable {
     private static final long serialVersionUID = 1;
 
@@ -22,8 +24,8 @@ public class StateEntity implements Serializable {
     @OneToMany(mappedBy = "state")
     private List<CityEntity> cityList = new ArrayList<>();
 
-    public StateEntity(Integer id, String name) {
-        this.id = id;
+    public StateEntity( String name) {
+        this.id = null;
         this.name = name;
     }
 
