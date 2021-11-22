@@ -48,6 +48,9 @@ public class ClientEntity implements Serializable {
     @OneToMany(mappedBy = "client")
     private List<AddressEntity> addressList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "client")
+    private List<OrderEntity> orderList = new ArrayList<>();
+
     public ClientEntity() {
     }
 
@@ -105,6 +108,10 @@ public class ClientEntity implements Serializable {
 
     public void setDocumentNumber(String documentNumber) {
         this.documentNumber = documentNumber;
+    }
+
+    public List<OrderEntity> getOrderList() {
+        return orderList;
     }
 
     @Override

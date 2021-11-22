@@ -1,22 +1,31 @@
 package com.treinamento.EcommerceBackend;
 
 import com.treinamento.EcommerceBackend.entities.AddressEntity;
+import com.treinamento.EcommerceBackend.entities.BankSlipPaymentEntity;
 import com.treinamento.EcommerceBackend.entities.CategoryEntity;
 import com.treinamento.EcommerceBackend.entities.CityEntity;
 import com.treinamento.EcommerceBackend.entities.ClientEntity;
+import com.treinamento.EcommerceBackend.entities.CreditCardEntity;
+import com.treinamento.EcommerceBackend.entities.OrderEntity;
+import com.treinamento.EcommerceBackend.entities.PaymentEntity;
 import com.treinamento.EcommerceBackend.entities.ProductEntity;
 import com.treinamento.EcommerceBackend.entities.StateEntity;
+import com.treinamento.EcommerceBackend.entities.enums.StatusPaymentEnum;
 import com.treinamento.EcommerceBackend.entities.enums.TypeClientEnum;
 import com.treinamento.EcommerceBackend.repositories.AdressRepository;
 import com.treinamento.EcommerceBackend.repositories.CategoryRepository;
 import com.treinamento.EcommerceBackend.repositories.CityRepository;
 import com.treinamento.EcommerceBackend.repositories.ClientRepository;
+import com.treinamento.EcommerceBackend.repositories.OrderRepository;
+import com.treinamento.EcommerceBackend.repositories.PaymentRepository;
 import com.treinamento.EcommerceBackend.repositories.ProductRepository;
 import com.treinamento.EcommerceBackend.repositories.StateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 @SpringBootApplication
@@ -43,6 +52,12 @@ public class EcommerceBackendApplication implements CommandLineRunner {
 
 	@Autowired
 	private AdressRepository adressRepository;
+
+	@Autowired
+	private OrderRepository orderRepository;
+
+	@Autowired
+	private PaymentRepository paymentRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -103,6 +118,28 @@ public class EcommerceBackendApplication implements CommandLineRunner {
 
 		clientRepository.saveAll(Arrays.asList(client1, client2, client3));
 		adressRepository.saveAll(Arrays.asList(address1, address2, address3, address4));
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		OrderEntity order1 = new OrderEntity(dateFormat.parse("30/09/2017 10:32"), client2, address4);
+		OrderEntity order2 = new OrderEntity(dateFormat.parse("10/10/2017 19:35"), client2, address3);
+		OrderEntity order3 = new OrderEntity(dateFormat.parse("11/11/2017 12:15"), client1, address2);
+
+		PaymentEntity payment1 = new CreditCardEntity(StatusPaymentEnum.QUITADO, order1, 6);
+		order1.setPayment(payment1);
+
+		PaymentEntity payment2 = new BankSlipPaymentEntity(StatusPaymentEnum.PENDENTE, order2,dateFormat.parse("10/12/2017 00:00"), null );
+		order2.setPayment(payment2);
+
+		PaymentEntity payment3 = new CreditCardEntity(StatusPaymentEnum.CANCELADO, order3, 2);
+		order3.setPayment(payment3);
+
+		client2.getOrderList().addAll(Arrays.asList(order1, order2));
+		client1.getOrderList().add(order3);
+
+		clientRepository.saveAll(Arrays.asList(client1, client2));
+		orderRepository.saveAll(Arrays.asList(order1, order2, order3));
+		paymentRepository.saveAll(Arrays.asList(payment1, payment2, payment3));
+
 
 	}
 }
