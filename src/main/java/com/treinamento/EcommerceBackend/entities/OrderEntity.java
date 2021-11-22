@@ -8,11 +8,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "Orders")
@@ -34,6 +39,9 @@ public class OrderEntity implements Serializable {
         @ManyToOne
         @JoinColumn(name = "IdAddress", foreignKey = @ForeignKey(name = "FkAddress"))
         private AddressEntity address;
+
+        @OneToMany(mappedBy = "id.order")
+        private Set<OrderItemEntity> orderItemList = new HashSet<>();
 
         public OrderEntity() {
         }
@@ -83,6 +91,10 @@ public class OrderEntity implements Serializable {
 
         public void setAddress(AddressEntity address) {
                 this.address = address;
+        }
+
+        public Set<OrderItemEntity> getOrderItemList() {
+                return orderItemList;
         }
 
         @Override

@@ -1,5 +1,7 @@
 package com.treinamento.EcommerceBackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -9,11 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "Product")
@@ -31,9 +36,12 @@ public class ProductEntity implements Serializable {
     private Double price;
 
     @ManyToMany
-    @JoinTable(name = "ProdutoCategoria", joinColumns = @JoinColumn(name = "IdProduct"), foreignKey= @ForeignKey(name="FkProduct"),
+    @JoinTable(name = "ProductCategory", joinColumns = @JoinColumn(name = "IdProduct"), foreignKey= @ForeignKey(name="FkProduct"),
             inverseJoinColumns = @JoinColumn(name = "IdCategory"), inverseForeignKey = @ForeignKey(name="FkCategory"))
     List<CategoryEntity> categoryList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItemEntity> orderItemList = new HashSet<>();
 
     public ProductEntity() {
     }
@@ -42,6 +50,15 @@ public class ProductEntity implements Serializable {
         this.id = null;
         this.name = name;
         this.price = price;
+    }
+
+    @JsonIgnore
+    public List<OrderEntity> getOrder(){
+        List<OrderEntity> orderList = new ArrayList<>();
+        for(OrderItemEntity item : orderItemList){
+            orderList.add(item.getOrder());
+        }
+        return orderList;
     }
 
     public List<CategoryEntity> getCategoryList() {
