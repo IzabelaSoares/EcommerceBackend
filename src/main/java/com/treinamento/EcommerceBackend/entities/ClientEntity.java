@@ -48,6 +48,8 @@ public class ClientEntity implements Serializable {
     @OneToMany(mappedBy = "client")
     private List<AddressEntity> addressList = new ArrayList<>();
 
+    public ClientEntity() {
+    }
 
     public ClientEntity(String name, String email, String documentNumber, TypeClientEnum typeClient) {
         this.id = null;

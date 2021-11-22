@@ -1,5 +1,7 @@
 package com.treinamento.EcommerceBackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -33,9 +35,10 @@ public class AddressEntity implements Serializable {
     private String code;
 
     @ManyToOne
-    @JoinColumn(name = "IdCity", foreignKey = @ForeignKey(name = "FkClient"))
+    @JoinColumn(name = "IdCity", foreignKey = @ForeignKey(name = "FkCity"))
     private CityEntity city;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "IdClient", foreignKey = @ForeignKey(name = "FkClient"))
     private ClientEntity client;
@@ -58,12 +61,13 @@ public class AddressEntity implements Serializable {
     @Override
     public String toString() {
         return "AddressEntity{" +
-                "id=" + id +
+                "number=" + number +
+                ", complement='" + complement + '\'' +
+                ", id=" + id +
                 ", street='" + street + '\'' +
-                ", number=" + number +
                 ", district='" + district + '\'' +
                 ", code='" + code + '\'' +
-                ", complement='" + complement + '\'' +
+                ", city=" + city +
                 ", client=" + client +
                 '}';
     }
