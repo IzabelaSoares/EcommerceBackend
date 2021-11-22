@@ -1,5 +1,6 @@
 package com.treinamento.EcommerceBackend.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
@@ -15,16 +16,21 @@ import java.util.Objects;
 @Table(name = "Address")
 public class AddressEntity implements Serializable {
     private static final long serialVersionUID = 1;
+    private Integer number;
+    private String complement;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(nullable = false)
     private String street;
-    private Integer number;
+
+    @Column(nullable = false)
     private String district;
+
+    @Column(nullable = false)
     private String code;
-    private String complement;
 
     @ManyToOne
     @JoinColumn(name = "IdCity", foreignKey = @ForeignKey(name = "FkClient"))

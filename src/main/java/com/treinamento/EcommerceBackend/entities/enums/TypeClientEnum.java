@@ -26,7 +26,7 @@ public enum TypeClientEnum {
             return null;
         }
         for (TypeClientEnum x : TypeClientEnum.values()) {
-            if (codigo.equals(x)) {
+            if (codigo.equals(x.getNumber())) {
                 return x;
             }
         }

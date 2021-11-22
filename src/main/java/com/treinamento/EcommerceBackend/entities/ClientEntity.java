@@ -21,21 +21,25 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "Client")
+@Table(name = "Client", uniqueConstraints ={ @UniqueConstraint(name = "UkDocument", columnNames ="documentNumber"),
+        @UniqueConstraint(name = "UkEmail", columnNames = { "email" })})
 public class ClientEntity implements Serializable {
+
     private static final long serialVersionUID = 1;
+    private String email;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(nullable = false)
     private String name;
-    private String email;
+
+    @Column(nullable = false)
     private Integer typeClient;
 
-    @Column(unique = true)
-
+    @Column(nullable = false)
     private String documentNumber;
-
 
     @ElementCollection
     @CollectionTable(name = "Phone", foreignKey = @ForeignKey(name = "FkClient"))

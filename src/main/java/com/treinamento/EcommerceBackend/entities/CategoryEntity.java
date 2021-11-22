@@ -2,6 +2,7 @@ package com.treinamento.EcommerceBackend.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,8 +22,9 @@ public class CategoryEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
 
+    @Column(nullable = false)
+    private String name;
 
     @ManyToMany(mappedBy = "categoryList")
     List<ProductEntity> produtoList = new ArrayList<>();
