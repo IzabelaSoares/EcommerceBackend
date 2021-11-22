@@ -25,7 +25,7 @@ public class CityEntity implements Serializable {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "StateId", foreignKey = @ForeignKey(name = "FkState"))
+    @JoinColumn(name = "IdState", foreignKey = @ForeignKey(name = "FkState"))
     private StateEntity state;
 
     public CityEntity() {
@@ -59,15 +59,6 @@ public class CityEntity implements Serializable {
 
     public void setState(StateEntity state) {
         this.state = state;
-    }
-
-    @Override
-    public String toString() {
-        return "CityEntity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", state=" + state +
-                '}';
     }
 
     @Override

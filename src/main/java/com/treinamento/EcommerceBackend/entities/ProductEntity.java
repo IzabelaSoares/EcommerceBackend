@@ -40,6 +40,7 @@ public class ProductEntity implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "IdCategory"), inverseForeignKey = @ForeignKey(name="FkCategory"))
     List<CategoryEntity> categoryList = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "id.product")
     private Set<OrderItemEntity> orderItemList = new HashSet<>();
 

@@ -26,7 +26,7 @@ public class StateEntity implements Serializable {
     @Column(nullable = false)
     private String name;
 
-    //@JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "state")
     private List<CityEntity> cityList = new ArrayList<>();
 

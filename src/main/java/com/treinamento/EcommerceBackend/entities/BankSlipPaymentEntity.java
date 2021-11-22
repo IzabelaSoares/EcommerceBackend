@@ -1,5 +1,6 @@
 package com.treinamento.EcommerceBackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.treinamento.EcommerceBackend.entities.enums.StatusPaymentEnum;
 
 import javax.persistence.Entity;
@@ -10,7 +11,11 @@ import java.util.Date;
 @Table(name = "BankSlipPayment")
 public class BankSlipPaymentEntity extends PaymentEntity{
     private static final long serialVersionUID = 1;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dueDate;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date paymentDate;
 
     public BankSlipPaymentEntity() {

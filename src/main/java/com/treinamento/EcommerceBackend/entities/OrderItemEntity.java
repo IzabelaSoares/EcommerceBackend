@@ -1,5 +1,7 @@
 package com.treinamento.EcommerceBackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -12,6 +14,7 @@ public class OrderItemEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @JsonIgnore
     @EmbeddedId
     private OrderItemPk id = new OrderItemPk();
 
@@ -19,14 +22,18 @@ public class OrderItemEntity implements Serializable {
     private Double price;
     private Double discount;
 
-    public OrderItemEntity(OrderEntity order, ProductEntity product, Integer quantity, Double price, Double discount) {
+    public OrderItemEntity(OrderEntity order, ProductEntity product, Integer quantity, Double discount) {
         this.id.setOrder(order);
         this.id.setProduct(product);
         this.quantity = quantity;
-        this.price = price;
+        this.price = product.getPrice();
         this.discount = discount;
     }
 
+    public OrderItemEntity() {
+    }
+
+    @JsonIgnore
     public OrderEntity getOrder(){
         return id.getOrder();
     }

@@ -1,5 +1,7 @@
 package com.treinamento.EcommerceBackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.treinamento.EcommerceBackend.entities.enums.StatusPaymentEnum;
 
 import javax.persistence.Entity;
@@ -24,6 +26,7 @@ public abstract class PaymentEntity implements Serializable {
     private Integer id;
     private Integer status;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "IdOrder", foreignKey = @ForeignKey(name = "FkOrder"))
     @MapsId

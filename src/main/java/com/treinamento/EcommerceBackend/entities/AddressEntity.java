@@ -59,20 +59,6 @@ public class AddressEntity implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return "AddressEntity{" +
-                "number=" + number +
-                ", complement='" + complement + '\'' +
-                ", id=" + id +
-                ", street='" + street + '\'' +
-                ", district='" + district + '\'' +
-                ", code='" + code + '\'' +
-                ", city=" + city +
-                ", client=" + client +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -139,6 +125,14 @@ public class AddressEntity implements Serializable {
 
     public void setClient(ClientEntity client) {
         this.client = client;
+    }
+
+    public CityEntity getCity() {
+        return city;
+    }
+
+    public void setCity(CityEntity city) {
+        this.city = city;
     }
 }
 

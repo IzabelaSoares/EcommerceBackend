@@ -7,6 +7,7 @@ import com.treinamento.EcommerceBackend.entities.CityEntity;
 import com.treinamento.EcommerceBackend.entities.ClientEntity;
 import com.treinamento.EcommerceBackend.entities.CreditCardEntity;
 import com.treinamento.EcommerceBackend.entities.OrderEntity;
+import com.treinamento.EcommerceBackend.entities.OrderItemEntity;
 import com.treinamento.EcommerceBackend.entities.PaymentEntity;
 import com.treinamento.EcommerceBackend.entities.ProductEntity;
 import com.treinamento.EcommerceBackend.entities.StateEntity;
@@ -16,6 +17,7 @@ import com.treinamento.EcommerceBackend.repositories.AdressRepository;
 import com.treinamento.EcommerceBackend.repositories.CategoryRepository;
 import com.treinamento.EcommerceBackend.repositories.CityRepository;
 import com.treinamento.EcommerceBackend.repositories.ClientRepository;
+import com.treinamento.EcommerceBackend.repositories.OrderItemRepository;
 import com.treinamento.EcommerceBackend.repositories.OrderRepository;
 import com.treinamento.EcommerceBackend.repositories.PaymentRepository;
 import com.treinamento.EcommerceBackend.repositories.ProductRepository;
@@ -59,6 +61,9 @@ public class EcommerceBackendApplication implements CommandLineRunner {
 	@Autowired
 	private PaymentRepository paymentRepository;
 
+	@Autowired
+	private OrderItemRepository orderItemRepository;
+
 	@Override
 	public void run(String... args) throws Exception {
 
@@ -67,7 +72,7 @@ public class EcommerceBackendApplication implements CommandLineRunner {
 		CategoryEntity cat3 = new CategoryEntity("Computers");
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
 
-		ProductEntity p1 = new ProductEntity("The Lord of the Rings", 0.5);
+		ProductEntity p1 = new ProductEntity("The Lord of the Rings", 100.5);
 		ProductEntity p2 = new ProductEntity("Smart TV", 2190.0);
 		ProductEntity p3 = new ProductEntity("Macbook Pro",  1250.0);
 		ProductEntity p4 = new ProductEntity("PC Gamer", 1200.0);
@@ -140,6 +145,22 @@ public class EcommerceBackendApplication implements CommandLineRunner {
 		orderRepository.saveAll(Arrays.asList(order1, order2, order3));
 		paymentRepository.saveAll(Arrays.asList(payment1, payment2, payment3));
 
+
+		OrderItemEntity orderItem1 = new OrderItemEntity(order1, p3, 3, 0.0);
+		OrderItemEntity orderItem2 = new OrderItemEntity(order1, p1, 1, 0.0);
+		OrderItemEntity orderItem3 = new OrderItemEntity(order1, p2, 7, 0.0);
+		OrderItemEntity orderItem4 = new OrderItemEntity(order1, p4, 5, 0.0);
+		order1.getOrderItemList().addAll(Arrays.asList(orderItem1, orderItem2, orderItem3, orderItem4));
+
+		OrderItemEntity orderItem8 = new OrderItemEntity(order2, p3, 2, 0.0);
+		OrderItemEntity orderItem5 = new OrderItemEntity(order2, p1, 4, 10.0);
+		order2.getOrderItemList().addAll(Arrays.asList(orderItem5, orderItem8));
+
+		OrderItemEntity orderItem6 = new OrderItemEntity(order3, p2, 8, 0.0);
+		OrderItemEntity orderItem7 = new OrderItemEntity(order3, p4, 6, 0.0);
+		order3.getOrderItemList().addAll(Arrays.asList(orderItem6, orderItem7));
+
+		orderItemRepository.saveAll(Arrays.asList(orderItem1, orderItem2, orderItem3, orderItem4, orderItem5, orderItem6, orderItem7, orderItem8));
 
 	}
 }

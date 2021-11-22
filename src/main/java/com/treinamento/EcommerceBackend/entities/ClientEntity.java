@@ -1,5 +1,7 @@
 package com.treinamento.EcommerceBackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.treinamento.EcommerceBackend.entities.enums.TypeClientEnum;
 
 import javax.persistence.CollectionTable;
@@ -48,6 +50,7 @@ public class ClientEntity implements Serializable {
     @OneToMany(mappedBy = "client")
     private List<AddressEntity> addressList = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<OrderEntity> orderList = new ArrayList<>();
 
