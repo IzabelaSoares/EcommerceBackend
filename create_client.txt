@@ -1,0 +1,16 @@
+Create a Client
+
+{
+    "email": "antonia@gmail.com",
+    "name": "Maria",
+    "typeClient": "1",
+    "documentNumber": "107.620.969-11",
+    "phone1": "47992880516",
+    "phone2": "4733342637",
+    "number": 13,
+    "complement": "perto da boate azul",
+    "street": "Rua Palmeiras",
+    "district": "Boa Vista",
+    "code": "89012201",
+    "cityId": 4
+}

@@ -1,7 +1,12 @@
 package com.treinamento.EcommerceBackend.services;
 
 import com.treinamento.EcommerceBackend.DTO.ClientDTO;
+import com.treinamento.EcommerceBackend.DTO.ClientNewDTO;
+import com.treinamento.EcommerceBackend.entities.AddressEntity;
+import com.treinamento.EcommerceBackend.entities.CityEntity;
 import com.treinamento.EcommerceBackend.entities.ClientEntity;
+import com.treinamento.EcommerceBackend.entities.enums.TypeClientEnum;
+import com.treinamento.EcommerceBackend.repositories.AdressRepository;
 import com.treinamento.EcommerceBackend.repositories.ClientRepository;
 import com.treinamento.EcommerceBackend.services.exceptions.DataIntegrityException;
 import com.treinamento.EcommerceBackend.services.exceptions.DatabaseException;
@@ -12,6 +17,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +27,9 @@ public class ClientService {
 
     @Autowired
     private ClientRepository clientRepository;
+
+    @Autowired
+    private AdressRepository adressRepository;
 
     public List<ClientEntity> findAll(){
         return clientRepository.findAll();
@@ -35,9 +45,12 @@ public class ClientService {
         return user.orElseThrow(() -> new DatabaseException(id));
     }
 
+    @Transactional
     public ClientEntity insert(ClientEntity client) {
         client.setId(null);
-        return clientRepository.save(client);
+        client = clientRepository.save(client);
+        adressRepository.saveAll(client.getAddressList());
+        return client;
     }
 
     public void delete(Integer id) {
@@ -58,7 +71,25 @@ public class ClientService {
     }
 
     public ClientEntity convertClientDTO(ClientDTO clientDTO){
-        return new ClientEntity(clientDTO.getId(), clientDTO.getName(), clientDTO.getEmail());
+        ClientEntity client = new ClientEntity(clientDTO.getId(), clientDTO.getName(), clientDTO.getEmail());
+        return client;
+    }
+
+    public ClientEntity convertClientDTO(ClientNewDTO clientDTO){
+        ClientEntity client = new ClientEntity(clientDTO.getName(), clientDTO.getEmail(),
+                clientDTO.getDocumentNumber(), TypeClientEnum.toEnum(clientDTO.getTypeClient()));
+        CityEntity city = new CityEntity(clientDTO.getCityId(), null,null);
+        AddressEntity address = new AddressEntity(clientDTO.getStreet(), clientDTO.getNumber(), clientDTO.getDistrict(),
+                clientDTO.getComplement(), clientDTO.getCode(), city, client);
+        client.getAddressList().add(address);
+        client.getPhonesList().add(clientDTO.getPhone1());
+        if(clientDTO.getPhone2() != null){
+            client.getPhonesList().add(clientDTO.getPhone2());
+        }
+        if(clientDTO.getPhone3() != null){
+            client.getPhonesList().add(clientDTO.getPhone3());
+        }
+        return client;
     }
 
 }

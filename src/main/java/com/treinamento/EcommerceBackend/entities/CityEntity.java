@@ -37,6 +37,12 @@ public class CityEntity implements Serializable {
         this.state = state;
     }
 
+    public CityEntity(Integer id, String name, StateEntity state) {
+        this.id = id;
+        this.name = name;
+        this.state = state;
+    }
+
     public Integer getId() {
         return id;
     }

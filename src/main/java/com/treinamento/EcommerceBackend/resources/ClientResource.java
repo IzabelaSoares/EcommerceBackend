@@ -1,7 +1,7 @@
 package com.treinamento.EcommerceBackend.resources;
 
-import com.treinamento.EcommerceBackend.DTO.CategoryDTO;
 import com.treinamento.EcommerceBackend.DTO.ClientDTO;
+import com.treinamento.EcommerceBackend.DTO.ClientNewDTO;
 import com.treinamento.EcommerceBackend.entities.ClientEntity;
 import com.treinamento.EcommerceBackend.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,8 +55,8 @@ public class ClientResource {
     }
 
     @PostMapping
-    public ResponseEntity<Void> insert(@Valid @RequestBody ClientDTO clientDTO){
-        ClientEntity client = clientService.convertClientDTO(clientDTO);
+    public ResponseEntity<Void> insert(@Valid @RequestBody ClientNewDTO clientNewDTO){
+        ClientEntity client = clientService.convertClientDTO(clientNewDTO);
         client = clientService.insert(client);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{/id}").buildAndExpand(client.getId()).toUri();
         return ResponseEntity.created(uri).build();

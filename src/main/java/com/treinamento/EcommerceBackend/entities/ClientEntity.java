@@ -1,9 +1,7 @@
 package com.treinamento.EcommerceBackend.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.treinamento.EcommerceBackend.entities.enums.TypeClientEnum;
-
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
