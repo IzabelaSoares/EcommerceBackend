@@ -1,4 +1,5 @@
 package com.treinamento.EcommerceBackend.resources.exceptions;
+import com.treinamento.EcommerceBackend.services.exceptions.DataIntegrityException;
 import com.treinamento.EcommerceBackend.services.exceptions.DatabaseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,4 +19,11 @@ public class ResourceExceptionHandler {
         return ResponseEntity.status(status).body(error1);
     }
 
+    @ExceptionHandler(DataIntegrityException.class)
+    public ResponseEntity<StandardError> dataIntegrityException(DataIntegrityException e, HttpServletRequest request){
+        String error = "Data Delete Problem";
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardError error1 = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(error1);
+    }
 }

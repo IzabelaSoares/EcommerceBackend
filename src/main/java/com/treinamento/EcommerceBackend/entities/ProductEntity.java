@@ -1,7 +1,6 @@
 package com.treinamento.EcommerceBackend.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -35,6 +34,7 @@ public class ProductEntity implements Serializable {
     @Column(nullable = false)
     private Double price;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "ProductCategory", joinColumns = @JoinColumn(name = "IdProduct"), foreignKey= @ForeignKey(name="FkProduct"),
             inverseJoinColumns = @JoinColumn(name = "IdCategory"), inverseForeignKey = @ForeignKey(name="FkCategory"))
