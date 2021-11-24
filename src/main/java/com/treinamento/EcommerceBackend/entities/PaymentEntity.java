@@ -41,6 +41,12 @@ public abstract class PaymentEntity implements Serializable {
         this.order = order;
     }
 
+    public PaymentEntity(OrderEntity order) {
+        this.id = null;
+        this.status = null;
+        this.order = order;
+    }
+
     public Integer getId() {
         return id;
     }

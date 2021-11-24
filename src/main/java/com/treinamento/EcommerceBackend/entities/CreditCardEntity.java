@@ -20,6 +20,11 @@ public class CreditCardEntity extends PaymentEntity{
         this.installmentsNumber = installmentsNumber;
     }
 
+    public CreditCardEntity(OrderEntity order, Integer installmentsNumber) {
+        super(order);
+        this.installmentsNumber = installmentsNumber;
+    }
+
     public Integer getInstallmentsNumber() {
         return installmentsNumber;
     }

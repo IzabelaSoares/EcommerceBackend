@@ -27,6 +27,12 @@ public class BankSlipPaymentEntity extends PaymentEntity{
         this.paymentDate = paymentDate;
     }
 
+    public BankSlipPaymentEntity(OrderEntity order, Date dueDate, Date paymentDate) {
+        super(order);
+        this.dueDate = dueDate;
+        this.paymentDate = paymentDate;
+    }
+
     public Date getDueDate() {
         return dueDate;
     }
