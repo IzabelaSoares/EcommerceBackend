@@ -1,12 +1,14 @@
 package com.treinamento.EcommerceBackend.DTO;
 
 import com.treinamento.EcommerceBackend.entities.ClientEntity;
+import com.treinamento.EcommerceBackend.services.validations.ClientUpdate;
 import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Objects;
 
+@ClientUpdate
 public class ClientDTO implements Serializable {
     private static final long serialVersionUID = 1;
     private Integer id;

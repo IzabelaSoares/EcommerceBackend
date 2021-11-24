@@ -2,9 +2,9 @@ Create a Client
 
 {
     "email": "antonia@gmail.com",
-    "name": "Maria",
+    "name": "Antonia",
     "typeClient": "1",
-    "documentNumber": "107.620.969-11",
+    "documentNumber": "67483140038",
     "phone1": "47992880516",
     "phone2": "4733342637",
     "number": 13,
