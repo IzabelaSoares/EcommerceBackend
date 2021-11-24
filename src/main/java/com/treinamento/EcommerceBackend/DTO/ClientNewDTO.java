@@ -1,19 +1,40 @@
 package com.treinamento.EcommerceBackend.DTO;
 
+import com.treinamento.EcommerceBackend.services.validations.ClientInsert;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
+@ClientInsert
 public class ClientNewDTO implements Serializable {
     private static final long serialVersionUID = 1;
 
+    @NotEmpty(message = "Preenchimento obrigatório!")
+    @Email(message = "Email inválido!")
     private String email;
+
+    @NotEmpty(message = "Preenchimento obrigatório!")
+    @Length(min=5, max = 120, message = "O nome do cliente deve conter no mínimo 5 e no máximo 120 caracteres!")
     private String name;
+
     private Integer typeClient;
+
+    @NotEmpty(message = "Preenchimento obrigatório!")
     private String documentNumber;
 
     private Integer number;
+
     private String complement;
+
+    @NotEmpty(message = "Preenchimento obrigatório!")
     private String street;
+
+    @NotEmpty(message = "Preenchimento obrigatório!")
     private String district;
+
+    @NotEmpty(message = "Preenchimento obrigatório!")
     private String code;
 
     private String phone1;

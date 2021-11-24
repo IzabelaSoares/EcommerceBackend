@@ -2,6 +2,8 @@ package com.treinamento.EcommerceBackend.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.treinamento.EcommerceBackend.entities.enums.TypeClientEnum;
+
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -45,7 +47,7 @@ public class ClientEntity implements Serializable {
     @CollectionTable(name = "Phone", foreignKey = @ForeignKey(name = "FkClient"))
     private Set<String> phonesList = new HashSet<>();
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<AddressEntity> addressList = new ArrayList<>();
 
     @JsonIgnore

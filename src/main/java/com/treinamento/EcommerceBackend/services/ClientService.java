@@ -18,7 +18,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -80,7 +79,7 @@ public class ClientService {
                 clientDTO.getDocumentNumber(), TypeClientEnum.toEnum(clientDTO.getTypeClient()));
         CityEntity city = new CityEntity(clientDTO.getCityId(), null,null);
         AddressEntity address = new AddressEntity(clientDTO.getStreet(), clientDTO.getNumber(), clientDTO.getDistrict(),
-                clientDTO.getComplement(), clientDTO.getCode(), city, client);
+                 clientDTO.getCode(), clientDTO.getComplement(),city, client);
         client.getAddressList().add(address);
         client.getPhonesList().add(clientDTO.getPhone1());
         if(clientDTO.getPhone2() != null){
