@@ -1,6 +1,8 @@
 package com.treinamento.EcommerceBackend.DTO;
 
 import com.treinamento.EcommerceBackend.entities.CategoryEntity;
+import org.hibernate.validator.constraints.Length;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -8,6 +10,9 @@ public class CategoryDTO implements Serializable {
     private static final long serialVersionUID = 1;
 
     private Integer id;
+
+    @NotEmpty(message = "Preenchimento obrigatório!")
+    @Length(min= 5, max = 80, message = "O nome informado deve conter no mínimo 5 e no máximo 80 caracteres!")
     private String name;
 
     public CategoryDTO() {

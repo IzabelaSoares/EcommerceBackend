@@ -35,6 +35,11 @@ public class CategoryEntity implements Serializable {
         this.name = nome;
     }
 
+    public CategoryEntity(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public List<ProductEntity> getProdutoList() {
         return produtoList;
     }

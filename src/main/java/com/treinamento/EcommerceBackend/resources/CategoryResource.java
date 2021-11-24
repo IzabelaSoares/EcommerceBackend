@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,6 +27,12 @@ public class CategoryResource {
 
     @Autowired
     private CategoryService categoryService;
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<CategoryEntity> findById(@PathVariable Integer id){
+        CategoryEntity category = categoryService.findById(id);
+        return ResponseEntity.ok().body(category);
+    }
 
     @GetMapping(value = "/page")
     public ResponseEntity<Page<CategoryDTO>> findPage(
@@ -45,14 +52,9 @@ public class CategoryResource {
         return ResponseEntity.ok().body(categoryDTOList);
     }
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<CategoryEntity> findById(@PathVariable Integer id){
-        CategoryEntity category = categoryService.findById(id);
-        return ResponseEntity.ok().body(category);
-    }
-
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody CategoryEntity category){
+    public ResponseEntity<Void> insert(@Valid @RequestBody CategoryDTO categoryDTO){
+        CategoryEntity category = categoryService.convertCategoryDTO(categoryDTO);
         category = categoryService.insert(category);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{/id}").buildAndExpand(category.getId()).toUri();
         return ResponseEntity.created(uri).build();
