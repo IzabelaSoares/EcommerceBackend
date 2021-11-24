@@ -101,17 +101,6 @@ public class OrderEntity implements Serializable {
         }
 
         @Override
-        public String toString() {
-                return "OrderEntity{" +
-                        "id=" + id +
-                        ", instant=" + instant +
-                        ", payment=" + payment +
-                        ", client=" + client +
-                        ", address=" + address +
-                        '}';
-        }
-
-        @Override
         public boolean equals(Object o) {
                 if (this == o) return true;
                 if (o == null || getClass() != o.getClass()) return false;

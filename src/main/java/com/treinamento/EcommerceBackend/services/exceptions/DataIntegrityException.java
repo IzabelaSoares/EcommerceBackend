@@ -7,9 +7,8 @@ public class DataIntegrityException extends RuntimeException {
 
 
     public DataIntegrityException(Object id){
-        super("Não é possivel excluir a categoria "+ id +", pois possui produtos atrelados!");
+        super("Não é possivel excluir o objeto de Id "+ id +", pois possui dados atrelados!");
     }
-
 
     public DataIntegrityException(String message) {
         super(message);

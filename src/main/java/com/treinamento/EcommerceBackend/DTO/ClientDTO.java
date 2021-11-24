@@ -1,31 +1,31 @@
 package com.treinamento.EcommerceBackend.DTO;
 
-import com.treinamento.EcommerceBackend.entities.CategoryEntity;
+import com.treinamento.EcommerceBackend.entities.ClientEntity;
 import org.hibernate.validator.constraints.Length;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class CategoryDTO implements Serializable {
+public class ClientDTO implements Serializable {
     private static final long serialVersionUID = 1;
-
     private Integer id;
 
-    @NotEmpty(message = "Preenchimento obrigatório!")
-    @Length(min= 5, max = 80, message = "O nome da categoria deve conter no mínimo 5 e no máximo 80 caracteres!")
+    @NotEmpty
+    @Email(message = "Email inválido!")
+    private String email;
+
+    @NotEmpty
+    @Length(min=5, max = 120, message = "O nome do cliente deve conter no mínimo 5 e no máximo 120 caracteres!")
     private String name;
 
-    public CategoryDTO() {
+    public ClientDTO() {
     }
 
-    public CategoryDTO(Integer id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public CategoryDTO(CategoryEntity category) {
-        this.id = category.getId();
-        this.name = category.getName();
+    public ClientDTO(ClientEntity client) {
+        this.id = client.getId();
+        this.name = client.getName();
+        this.email = client.getEmail();
     }
 
     public Integer getId() {
@@ -44,11 +44,19 @@ public class CategoryDTO implements Serializable {
         this.name = name;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CategoryDTO that = (CategoryDTO) o;
+        ClientDTO that = (ClientDTO) o;
         return Objects.equals(id, that.id);
     }
 

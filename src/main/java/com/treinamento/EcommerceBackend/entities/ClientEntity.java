@@ -65,6 +65,14 @@ public class ClientEntity implements Serializable {
         this.typeClient = typeClient.getNumber();
     }
 
+    public ClientEntity(Integer id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.documentNumber = null;
+        this.typeClient = null;
+    }
+
     public TypeClientEnum getTypeClient() {
         return TypeClientEnum.toEnum(typeClient);
     }
@@ -115,19 +123,6 @@ public class ClientEntity implements Serializable {
 
     public List<OrderEntity> getOrderList() {
         return orderList;
-    }
-
-    @Override
-    public String toString() {
-        return "ClientEntity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", documentNumber='" + documentNumber + '\'' +
-                ", typeClient=" + typeClient +
-                ", phones=" + phonesList +
-                ", addressList=" + addressList +
-                '}';
     }
 
     @Override
