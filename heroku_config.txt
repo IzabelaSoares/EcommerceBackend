@@ -1,0 +1,6 @@
+mysql://b7803f035e275a:b4c5b4bb@us-cdbr-east-04.cleardb.com/
+heroku_0282d467e01e0f2?reconnect=true
+
+
+mysql 
+--host=us-cdbr-east-04.cleardb.com --user=b7803f035e275a --password=b4c5b4bb --reconnect heroku_0282d467e01e0f2 < database_ecommerce.sql
