@@ -1,5 +1,5 @@
 package com.treinamento.EcommerceBackend.services.validations;
-import com.treinamento.EcommerceBackend.DTO.ClientNewDTO;
+import com.treinamento.EcommerceBackend.dto.ClientNewDTO;
 import com.treinamento.EcommerceBackend.entities.ClientEntity;
 import com.treinamento.EcommerceBackend.entities.enums.TypeClientEnum;
 import com.treinamento.EcommerceBackend.repositories.ClientRepository;

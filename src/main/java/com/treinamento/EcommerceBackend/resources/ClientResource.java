@@ -1,7 +1,7 @@
 package com.treinamento.EcommerceBackend.resources;
 
-import com.treinamento.EcommerceBackend.DTO.ClientDTO;
-import com.treinamento.EcommerceBackend.DTO.ClientNewDTO;
+import com.treinamento.EcommerceBackend.dto.ClientDTO;
+import com.treinamento.EcommerceBackend.dto.ClientNewDTO;
 import com.treinamento.EcommerceBackend.entities.ClientEntity;
 import com.treinamento.EcommerceBackend.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;

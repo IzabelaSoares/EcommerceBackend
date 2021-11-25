@@ -1,4 +1,4 @@
-package com.treinamento.EcommerceBackend.DTO;
+package com.treinamento.EcommerceBackend.dto;
 
 import com.treinamento.EcommerceBackend.entities.CategoryEntity;
 import org.hibernate.validator.constraints.Length;

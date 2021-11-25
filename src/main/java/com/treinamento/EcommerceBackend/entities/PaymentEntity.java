@@ -1,9 +1,8 @@
 package com.treinamento.EcommerceBackend.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.treinamento.EcommerceBackend.entities.enums.StatusPaymentEnum;
-
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.Id;
@@ -19,6 +18,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "Payment")
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonTypeInfo(use= JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
 public abstract class PaymentEntity implements Serializable {
     private static final long serialVersionUID = 1;
 

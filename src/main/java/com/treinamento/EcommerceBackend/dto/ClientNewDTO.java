@@ -1,4 +1,4 @@
-package com.treinamento.EcommerceBackend.DTO;
+package com.treinamento.EcommerceBackend.dto;
 import com.treinamento.EcommerceBackend.services.validations.ClientInsert;
 import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.Email;

@@ -1,0 +1,16 @@
+Order with credit card
+
+{
+"client": {"id": 2},"address": {"id": 1},
+"payment": {
+"installmentsNumber": 2,
+"@type": "creditCard"
+},
+"orderItemList":[
+{"quantity": 2, "product": {"id":3}},
+{"quantity": 3, "product": {"id":1}}
+]
+}
+
+
+Order with bank slip 

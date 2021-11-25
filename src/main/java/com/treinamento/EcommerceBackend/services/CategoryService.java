@@ -1,6 +1,6 @@
 package com.treinamento.EcommerceBackend.services;
 
-import com.treinamento.EcommerceBackend.DTO.CategoryDTO;
+import com.treinamento.EcommerceBackend.dto.CategoryDTO;
 import com.treinamento.EcommerceBackend.entities.CategoryEntity;
 import com.treinamento.EcommerceBackend.repositories.CategoryRepository;
 import com.treinamento.EcommerceBackend.services.exceptions.DataIntegrityException;

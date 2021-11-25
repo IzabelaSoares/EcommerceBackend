@@ -1,7 +1,7 @@
 package com.treinamento.EcommerceBackend.services;
 
-import com.treinamento.EcommerceBackend.DTO.ClientDTO;
-import com.treinamento.EcommerceBackend.DTO.ClientNewDTO;
+import com.treinamento.EcommerceBackend.dto.ClientDTO;
+import com.treinamento.EcommerceBackend.dto.ClientNewDTO;
 import com.treinamento.EcommerceBackend.entities.AddressEntity;
 import com.treinamento.EcommerceBackend.entities.CityEntity;
 import com.treinamento.EcommerceBackend.entities.ClientEntity;

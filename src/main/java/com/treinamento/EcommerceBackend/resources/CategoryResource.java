@@ -1,5 +1,5 @@
 package com.treinamento.EcommerceBackend.resources;
-import com.treinamento.EcommerceBackend.DTO.CategoryDTO;
+import com.treinamento.EcommerceBackend.dto.CategoryDTO;
 import com.treinamento.EcommerceBackend.entities.CategoryEntity;
 import com.treinamento.EcommerceBackend.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -5,7 +5,7 @@ import com.treinamento.EcommerceBackend.entities.BankSlipPaymentEntity;
 import com.treinamento.EcommerceBackend.entities.CategoryEntity;
 import com.treinamento.EcommerceBackend.entities.CityEntity;
 import com.treinamento.EcommerceBackend.entities.ClientEntity;
-import com.treinamento.EcommerceBackend.entities.CreditCardEntity;
+import com.treinamento.EcommerceBackend.entities.CreditCardPaymentEntity;
 import com.treinamento.EcommerceBackend.entities.OrderEntity;
 import com.treinamento.EcommerceBackend.entities.OrderItemEntity;
 import com.treinamento.EcommerceBackend.entities.PaymentEntity;
@@ -137,13 +137,13 @@ public class EcommerceBackendApplication implements CommandLineRunner {
 		OrderEntity order2 = new OrderEntity(dateFormat.parse("10/10/2017 19:35"), client2, address3);
 		OrderEntity order3 = new OrderEntity(dateFormat.parse("11/11/2017 12:15"), client1, address2);
 
-		PaymentEntity payment1 = new CreditCardEntity(StatusPaymentEnum.QUITADO, order1, 6);
+		PaymentEntity payment1 = new CreditCardPaymentEntity(StatusPaymentEnum.QUITADO, order1, 6);
 		order1.setPayment(payment1);
 
 		PaymentEntity payment2 = new BankSlipPaymentEntity(StatusPaymentEnum.PENDENTE, order2,dateFormat.parse("10/12/2017 00:00"), null );
 		order2.setPayment(payment2);
 
-		PaymentEntity payment3 = new CreditCardEntity(StatusPaymentEnum.CANCELADO, order3, 2);
+		PaymentEntity payment3 = new CreditCardPaymentEntity(StatusPaymentEnum.CANCELADO, order3, 2);
 		order3.setPayment(payment3);
 
 		client2.getOrderList().addAll(Arrays.asList(order1, order2));

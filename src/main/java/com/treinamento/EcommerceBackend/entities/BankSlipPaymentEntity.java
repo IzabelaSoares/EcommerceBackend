@@ -1,6 +1,7 @@
 package com.treinamento.EcommerceBackend.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.treinamento.EcommerceBackend.entities.enums.StatusPaymentEnum;
 
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "BankSlipPayment")
+@JsonTypeName("bankSlip")
 public class BankSlipPaymentEntity extends PaymentEntity{
     private static final long serialVersionUID = 1;
 

@@ -1,7 +1,5 @@
 package com.treinamento.EcommerceBackend.resources;
-import com.treinamento.EcommerceBackend.DTO.CategoryDTO;
-import com.treinamento.EcommerceBackend.DTO.ProductDTO;
-import com.treinamento.EcommerceBackend.entities.CategoryEntity;
+import com.treinamento.EcommerceBackend.dto.ProductDTO;
 import com.treinamento.EcommerceBackend.entities.ProductEntity;
 import com.treinamento.EcommerceBackend.resources.utils.Url;
 import com.treinamento.EcommerceBackend.services.ProductService;
