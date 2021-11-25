@@ -54,7 +54,7 @@ public class OrderItemEntity implements Serializable {
     public void setProduct(ProductEntity product){
         id.setProduct(product);
     }
-    
+
     public OrderItemPk getId() {
         return id;
     }
