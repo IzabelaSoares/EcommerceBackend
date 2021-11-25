@@ -6,18 +6,17 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
-import java.util.Objects;
 
 @ClientUpdate
 public class ClientDTO implements Serializable {
     private static final long serialVersionUID = 1;
     private Integer id;
 
-    @NotEmpty
-    @Email(message = "Email inválido!")
+    @NotEmpty(message = "Preenchimento obrigatório!")
+    @Email(message = "Email inválid!")
     private String email;
 
-    @NotEmpty
+    @NotEmpty(message = "Preenchimento obrigatório!")
     @Length(min=5, max = 120, message = "O nome do cliente deve conter no mínimo 5 e no máximo 120 caracteres!")
     private String name;
 
@@ -25,9 +24,9 @@ public class ClientDTO implements Serializable {
     }
 
     public ClientDTO(ClientEntity client) {
-        this.id = client.getId();
-        this.name = client.getName();
-        this.email = client.getEmail();
+        id = client.getId();
+        name = client.getName();
+        email = client.getEmail();
     }
 
     public Integer getId() {
@@ -54,16 +53,4 @@ public class ClientDTO implements Serializable {
         this.email = email;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ClientDTO that = (ClientDTO) o;
-        return Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

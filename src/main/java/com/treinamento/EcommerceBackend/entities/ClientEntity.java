@@ -2,7 +2,6 @@ package com.treinamento.EcommerceBackend.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.treinamento.EcommerceBackend.entities.enums.TypeClientEnum;
-
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -24,10 +23,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "Client", uniqueConstraints ={ @UniqueConstraint(name = "UkDocument", columnNames ="documentNumber"),
-        /*@UniqueConstraint(name = "UkEmail", columnNames = { "email" })*/})
+        @UniqueConstraint(name = "UkEmail", columnNames = {"email"})})
 public class ClientEntity implements Serializable {
 
     private static final long serialVersionUID = 1;
+
     private String email;
 
     @Id

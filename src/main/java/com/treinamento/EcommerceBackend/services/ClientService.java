@@ -61,7 +61,7 @@ public class ClientService {
             throw new DataIntegrityException(id);
         }
     }
-    
+
     public ClientEntity update(ClientEntity client) {
         ClientEntity clientUpdate = findById(client.getId());
         clientUpdate.setName(client.getName());
@@ -74,19 +74,19 @@ public class ClientService {
         return client;
     }
 
-    public ClientEntity convertClientDTO(ClientNewDTO clientDTO){
-        ClientEntity client = new ClientEntity(clientDTO.getName(), clientDTO.getEmail(),
-                clientDTO.getDocumentNumber(), TypeClientEnum.toEnum(clientDTO.getTypeClient()));
-        CityEntity city = new CityEntity(clientDTO.getCityId(), null,null);
-        AddressEntity address = new AddressEntity(clientDTO.getStreet(), clientDTO.getNumber(), clientDTO.getDistrict(),
-                 clientDTO.getCode(), clientDTO.getComplement(),city, client);
+    public ClientEntity convertClientDTO(ClientNewDTO clientNewDTO){
+        ClientEntity client = new ClientEntity(clientNewDTO.getName(), clientNewDTO.getEmail(),
+                clientNewDTO.getDocumentNumber(), TypeClientEnum.toEnum(clientNewDTO.getTypeClient()));
+        CityEntity city = new CityEntity(clientNewDTO.getCityId(), null,null);
+        AddressEntity address = new AddressEntity(clientNewDTO.getStreet(), clientNewDTO.getNumber(), clientNewDTO.getDistrict(),
+                 clientNewDTO.getCode(), clientNewDTO.getComplement(),city, client);
         client.getAddressList().add(address);
-        client.getPhonesList().add(clientDTO.getPhone1());
-        if(clientDTO.getPhone2() != null){
-            client.getPhonesList().add(clientDTO.getPhone2());
+        client.getPhonesList().add(clientNewDTO.getPhone1());
+        if(clientNewDTO.getPhone2() != null){
+            client.getPhonesList().add(clientNewDTO.getPhone2());
         }
-        if(clientDTO.getPhone3() != null){
-            client.getPhonesList().add(clientDTO.getPhone3());
+        if(clientNewDTO.getPhone3() != null){
+            client.getPhonesList().add(clientNewDTO.getPhone3());
         }
         return client;
     }

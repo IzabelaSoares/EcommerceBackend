@@ -1,8 +1,6 @@
 package com.treinamento.EcommerceBackend.DTO;
-
 import com.treinamento.EcommerceBackend.services.validations.ClientInsert;
 import org.hibernate.validator.constraints.Length;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
@@ -12,7 +10,7 @@ public class ClientNewDTO implements Serializable {
     private static final long serialVersionUID = 1;
 
     @NotEmpty(message = "Preenchimento obrigatório!")
-    @Email(message = "Email inválido!")
+    @Email(message = "Email invalid!")
     private String email;
 
     @NotEmpty(message = "Preenchimento obrigatório!")
