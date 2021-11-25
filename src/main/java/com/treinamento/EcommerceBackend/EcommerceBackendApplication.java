@@ -77,17 +77,25 @@ public class EcommerceBackendApplication implements CommandLineRunner {
 		ProductEntity p3 = new ProductEntity("Macbook Pro",  1250.0);
 		ProductEntity p4 = new ProductEntity("PC Gamer", 1200.0);
 		ProductEntity p5 = new ProductEntity("Rails for Dummies",100.99);
+
+		ProductEntity p6 = new ProductEntity("Laptop", 5100.5);
+		ProductEntity p7 = new ProductEntity("Iphone 11", 7190.0);
+		ProductEntity p8 = new ProductEntity("Harry Potter 1",  50.0);
+		ProductEntity p9 = new ProductEntity("Headset", 120.0);
+		ProductEntity p10 = new ProductEntity("Legally Blond",10.99);
 		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 
 		p1.getCategoryList().add(cat2);
-		p2.getCategoryList().add(cat1);
-		p2.getCategoryList().add(cat3);
-		p3.getCategoryList().add(cat1);
-		p3.getCategoryList().add(cat3);
-		p4.getCategoryList().add(cat1);
+		p2.getCategoryList().addAll(Arrays.asList(cat1, cat3));
+		p3.getCategoryList().addAll(Arrays.asList(cat1, cat3));
 		p4.getCategoryList().add(cat3);
 		p5.getCategoryList().add(cat2);
-		productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
+		p6.getCategoryList().add(cat3);
+		p7.getCategoryList().addAll(Arrays.asList(cat1, cat3));
+		p8.getCategoryList().add(cat2);
+		p9.getCategoryList().add(cat1);
+		p10.getCategoryList().add(cat2);
+		productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5, p6, p7, p8, p9, p10));
 
 		StateEntity state1 = new StateEntity("Minas Gerais");
 		StateEntity state2 = new StateEntity("São Paulo");
