@@ -23,93 +23,97 @@ import java.util.Set;
 @Entity
 @Table(name = "Orders")
 public class OrderEntity implements Serializable {
-        private static final long serialVersionUID = 1;
+    private static final long serialVersionUID = 1;
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-        @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-        private Date instant;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+    private Date instant;
 
-        @OneToOne(cascade = CascadeType.ALL, mappedBy = "order")
-        private PaymentEntity payment;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "order")
+    private PaymentEntity payment;
 
-        @ManyToOne
-        @JoinColumn(name = "IdClient", foreignKey = @ForeignKey(name = "FkClient"))
-        private ClientEntity client;
+    @ManyToOne
+    @JoinColumn(name = "IdClient", foreignKey = @ForeignKey(name = "FkClient"))
+    private ClientEntity client;
 
-        @ManyToOne
-        @JoinColumn(name = "IdAddress", foreignKey = @ForeignKey(name = "FkAddress"))
-        private AddressEntity address;
+    @ManyToOne
+    @JoinColumn(name = "IdAddress", foreignKey = @ForeignKey(name = "FkAddress"))
+    private AddressEntity address;
 
-        @OneToMany(mappedBy = "id.order")
-        private Set<OrderItemEntity> orderItemList = new HashSet<>();
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItemEntity> orderItemList = new HashSet<>();
 
-        public OrderEntity() {
-        }
+    public OrderEntity() {
+    }
 
-        public OrderEntity(Date instant, ClientEntity client, AddressEntity address) {
-                this.id = null;
-                this.instant = instant;
-                this.client = client;
-                this.address = address;
-        }
+    public OrderEntity(Date instant, ClientEntity client, AddressEntity address) {
+        this.id = null;
+        this.instant = instant;
+        this.client = client;
+        this.address = address;
+    }
 
-        public Integer getId() {
-                return id;
-        }
+    public Double getTotal() {
+        return orderItemList.stream().mapToDouble(x -> x.getSubTotal()).sum();
+    }
 
-        public void setId(Integer id) {
-                this.id = id;
-        }
+    public Integer getId() {
+        return id;
+    }
 
-        public Date getInstant() {
-                return instant;
-        }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-        public void setInstant(Date instant) {
-                this.instant = instant;
-        }
+    public Date getInstant() {
+        return instant;
+    }
 
-        public PaymentEntity getPayment() {
-                return payment;
-        }
+    public void setInstant(Date instant) {
+        this.instant = instant;
+    }
 
-        public void setPayment(PaymentEntity payment) {
-                this.payment = payment;
-        }
+    public PaymentEntity getPayment() {
+        return payment;
+    }
 
-        public ClientEntity getClient() {
-                return client;
-        }
+    public void setPayment(PaymentEntity payment) {
+        this.payment = payment;
+    }
 
-        public void setClient(ClientEntity client) {
-                this.client = client;
-        }
+    public ClientEntity getClient() {
+        return client;
+    }
 
-        public AddressEntity getAddress() {
-                return address;
-        }
+    public void setClient(ClientEntity client) {
+        this.client = client;
+    }
 
-        public void setAddress(AddressEntity address) {
-                this.address = address;
-        }
+    public AddressEntity getAddress() {
+        return address;
+    }
 
-        public Set<OrderItemEntity> getOrderItemList() {
-                return orderItemList;
-        }
+    public void setAddress(AddressEntity address) {
+        this.address = address;
+    }
 
-        @Override
-        public boolean equals(Object o) {
-                if (this == o) return true;
-                if (o == null || getClass() != o.getClass()) return false;
-                OrderEntity that = (OrderEntity) o;
-                return Objects.equals(id, that.id);
-        }
+    public Set<OrderItemEntity> getOrderItemList() {
+        return orderItemList;
+    }
 
-        @Override
-        public int hashCode() {
-                return Objects.hash(id);
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderEntity that = (OrderEntity) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

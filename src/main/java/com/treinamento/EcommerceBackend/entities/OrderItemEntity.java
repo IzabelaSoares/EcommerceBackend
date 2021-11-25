@@ -33,6 +33,11 @@ public class OrderItemEntity implements Serializable {
     public OrderItemEntity() {
     }
 
+
+    public Double getSubTotal(){
+        return (price - discount) * quantity;
+    }
+
     @JsonIgnore
     public OrderEntity getOrder(){
         return id.getOrder();
