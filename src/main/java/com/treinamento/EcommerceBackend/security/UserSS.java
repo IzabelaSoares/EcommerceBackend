@@ -27,6 +27,8 @@ public class UserSS implements UserDetails {
         this.authorities = profileList.stream().map(profile -> new SimpleGrantedAuthority(profile.getDescription())).collect(Collectors.toList());
     }
 
+
+
     public Integer getId() {
         return id;
     }

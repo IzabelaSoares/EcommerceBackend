@@ -5,9 +5,11 @@ import com.treinamento.EcommerceBackend.dto.ClientNewDTO;
 import com.treinamento.EcommerceBackend.entities.AddressEntity;
 import com.treinamento.EcommerceBackend.entities.CityEntity;
 import com.treinamento.EcommerceBackend.entities.ClientEntity;
+import com.treinamento.EcommerceBackend.entities.enums.ProfileUserEnum;
 import com.treinamento.EcommerceBackend.entities.enums.TypeClientEnum;
 import com.treinamento.EcommerceBackend.repositories.AdressRepository;
 import com.treinamento.EcommerceBackend.repositories.ClientRepository;
+import com.treinamento.EcommerceBackend.security.UserSS;
 import com.treinamento.EcommerceBackend.services.exceptions.DataIntegrityException;
 import com.treinamento.EcommerceBackend.services.exceptions.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.AuthorizationServiceException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,8 +47,12 @@ public class ClientService {
     }
 
     public ClientEntity findById(Integer id){
-        Optional<ClientEntity> user = clientRepository.findById(id);
-        return user.orElseThrow(() -> new DatabaseException(id));
+        UserSS userSS = UserService.authenticated();
+        if(userSS == null || !userSS.hasRole(ProfileUserEnum.ADMIN) && !id.equals(userSS.getId())){
+            throw new AuthorizationServiceException("Access denied!");
+        }
+        Optional<ClientEntity> client = clientRepository.findById(id);
+        return client.orElseThrow(() -> new DatabaseException(id));
     }
 
     @Transactional
