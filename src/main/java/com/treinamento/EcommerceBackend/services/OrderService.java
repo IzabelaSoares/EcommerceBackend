@@ -1,20 +1,15 @@
 package com.treinamento.EcommerceBackend.services;
 
 import com.treinamento.EcommerceBackend.entities.BankSlipPaymentEntity;
-import com.treinamento.EcommerceBackend.entities.CategoryEntity;
 import com.treinamento.EcommerceBackend.entities.OrderEntity;
-import com.treinamento.EcommerceBackend.entities.ProductEntity;
 import com.treinamento.EcommerceBackend.entities.enums.StatusPaymentEnum;
-import com.treinamento.EcommerceBackend.repositories.CategoryRepository;
 import com.treinamento.EcommerceBackend.repositories.OrderItemRepository;
 import com.treinamento.EcommerceBackend.repositories.OrderRepository;
 import com.treinamento.EcommerceBackend.repositories.PaymentRepository;
-import com.treinamento.EcommerceBackend.repositories.ProductRepository;
 import com.treinamento.EcommerceBackend.services.exceptions.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -74,7 +69,8 @@ public class OrderService {
             item.setOrder(order);
         }
         orderItemRepository.saveAll(order.getOrderItemList());
-        emailService.sendOrderConfirmationHtmlEmail(order);
+        //emailService.sendOrderConfirmationHtmlEmail(order);
+        //emailService.sendOrderConfirmationMail(order);
         return order;
     }
 
