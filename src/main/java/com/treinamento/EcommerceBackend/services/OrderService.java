@@ -1,17 +1,22 @@
 package com.treinamento.EcommerceBackend.services;
 
 import com.treinamento.EcommerceBackend.entities.BankSlipPaymentEntity;
+import com.treinamento.EcommerceBackend.entities.ClientEntity;
 import com.treinamento.EcommerceBackend.entities.OrderEntity;
 import com.treinamento.EcommerceBackend.entities.enums.StatusPaymentEnum;
 import com.treinamento.EcommerceBackend.repositories.OrderItemRepository;
 import com.treinamento.EcommerceBackend.repositories.OrderRepository;
 import com.treinamento.EcommerceBackend.repositories.PaymentRepository;
+import com.treinamento.EcommerceBackend.security.UserSS;
 import com.treinamento.EcommerceBackend.services.exceptions.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.access.AuthorizationServiceException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -37,10 +42,6 @@ public class OrderService {
 
     @Autowired
     private ClientService clientService;
-
-    public List<OrderEntity> findAll(){
-        return orderRepository.findAll();
-    }
 
     public OrderEntity findById(Integer id){
         Optional<OrderEntity> user = orderRepository.findById(id);
@@ -72,6 +73,16 @@ public class OrderService {
         //emailService.sendOrderConfirmationHtmlEmail(order);
         //emailService.sendOrderConfirmationMail(order);
         return order;
+    }
+
+    public Page<OrderEntity> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+        UserSS user = UserService.authenticated();
+        if (user == null) {
+            throw new AuthorizationServiceException("Access Denied!");
+        }
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+        ClientEntity client =  clientService.findById(user.getId());
+        return orderRepository.findByClient(client, pageRequest);
     }
 
 }
