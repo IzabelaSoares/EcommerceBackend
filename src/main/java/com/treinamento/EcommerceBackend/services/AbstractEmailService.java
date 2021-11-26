@@ -1,5 +1,6 @@
 package com.treinamento.EcommerceBackend.services;
 
+import com.treinamento.EcommerceBackend.entities.ClientEntity;
 import com.treinamento.EcommerceBackend.entities.OrderEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -68,5 +69,18 @@ public abstract class AbstractEmailService implements EmailService{
         mimeMessageHelper.setText(htmlFromTemplateOrder(order), true);
         return mimeMessage;
     }
+    @Override
+    public void sendNewPasswordEmail(ClientEntity client, String newPassword) {
+        SimpleMailMessage simpleMailMessage = prepareNewPasswordEmail(client, newPassword);
+    }
 
+    protected SimpleMailMessage prepareNewPasswordEmail(ClientEntity client, String newPassword){
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setTo(client.getEmail());
+        simpleMailMessage.setFrom(sender);
+        simpleMailMessage.setSubject("Request For New Password!");
+        simpleMailMessage.setSentDate(new Date(System.currentTimeMillis()));
+        simpleMailMessage.setText("New Password: " + newPassword);
+        return simpleMailMessage;
+    }
 }
