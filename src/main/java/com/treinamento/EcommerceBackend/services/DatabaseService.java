@@ -105,7 +105,7 @@ public class DatabaseService {
         cityRepository.saveAll(Arrays.asList(city1, city2, city3, city4, city5, city6));
 
         ClientEntity client1 = new ClientEntity("Maria", "maria@gmail.com", "103.620.968-22", TypeClientEnum.PESSOA_FISICA);
-        ClientEntity client2 = new ClientEntity("Clara", "clara@gmail.com", "104.620.964-23", TypeClientEnum.PESSOA_FISICA);
+        ClientEntity client2 = new ClientEntity("Clara", "soares.izabelamaria@gmail.com", "104.620.964-23", TypeClientEnum.PESSOA_FISICA);
         ClientEntity client3 = new ClientEntity("Maria Clara", "mariaclara@gmail.com", "107.520.968-24", TypeClientEnum.PESSOA_FISICA);
 
 

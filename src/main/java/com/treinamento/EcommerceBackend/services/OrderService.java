@@ -32,10 +32,16 @@ public class OrderService {
     private PaymentRepository paymentRepository;
 
     @Autowired
-    private ProductRepository productRepository;
+    private ProductService productService;
 
     @Autowired
     private OrderItemRepository orderItemRepository;
+
+    @Autowired
+    private EmailService emailService;
+
+    @Autowired
+    private ClientService clientService;
 
     public List<OrderEntity> findAll(){
         return orderRepository.findAll();
@@ -50,6 +56,7 @@ public class OrderService {
     public OrderEntity insert(OrderEntity order) {
         order.setId(null);
         order.setInstant(new Date());
+        order.setClient(clientService.findById(order.getClient().getId()));
         order.getPayment().setStatus(StatusPaymentEnum.PENDENTE);
         order.getPayment().setOrder(order);
         //payment
@@ -62,10 +69,12 @@ public class OrderService {
         //order list itens
         for(var item : order.getOrderItemList()){
             item.setDiscount(0.0);
-            item.setPrice(productRepository.findById(item.getProduct().getId()).get().getPrice());
+            item.setProduct(productService.findById(item.getProduct().getId()));
+            item.setPrice(item.getProduct().getPrice());
             item.setOrder(order);
         }
         orderItemRepository.saveAll(order.getOrderItemList());
+        emailService.sendOrderConfirmationMail(order);
         return order;
     }
 

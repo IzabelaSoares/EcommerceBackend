@@ -15,8 +15,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 
@@ -102,6 +105,28 @@ public class OrderEntity implements Serializable {
 
     public Set<OrderItemEntity> getOrderItemList() {
         return orderItemList;
+    }
+
+    @Override
+    public String toString() {
+        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("en", "US"));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        StringBuilder builder = new StringBuilder();
+        builder.append("Order Number: ");
+        builder.append(getId());
+        builder.append(", Instant: ");
+        builder.append(dateFormat.format(getInstant()));
+        builder.append(", Client ");
+        builder.append(getClient().getName());
+        builder.append(", Payment Situation: ");
+        builder.append(getPayment().getStatus().getDescription());
+        builder.append("\nDetails:\n");
+        for(var order :orderItemList){
+            builder.append(order.toString());
+        }
+        builder.append("Total Order: ");
+        builder.append(numberFormat.format(getTotal()));
+        return builder.toString();
     }
 
     @Override
