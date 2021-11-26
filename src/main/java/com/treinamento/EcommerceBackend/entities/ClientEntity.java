@@ -1,12 +1,14 @@
 package com.treinamento.EcommerceBackend.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.treinamento.EcommerceBackend.entities.enums.ProfileUserEnum;
 import com.treinamento.EcommerceBackend.entities.enums.TypeClientEnum;
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +22,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "Client", uniqueConstraints ={ @UniqueConstraint(name = "UkDocument", columnNames ="documentNumber"),
@@ -32,7 +35,6 @@ public class ClientEntity implements Serializable {
 
     @JsonIgnore
     private String password;
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,6 +53,10 @@ public class ClientEntity implements Serializable {
     @CollectionTable(name = "Phone", foreignKey = @ForeignKey(name = "FkClient"))
     private Set<String> phonesList = new HashSet<>();
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "Profiles")
+    private Set<Integer> profileList = new HashSet<>();
+
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<AddressEntity> addressList = new ArrayList<>();
 
@@ -59,6 +65,7 @@ public class ClientEntity implements Serializable {
     private List<OrderEntity> orderList = new ArrayList<>();
 
     public ClientEntity() {
+        addProfile(ProfileUserEnum.CLIENT);
     }
 
     public ClientEntity(String name, String email, String documentNumber, TypeClientEnum typeClient, String password) {
@@ -68,6 +75,7 @@ public class ClientEntity implements Serializable {
         this.documentNumber = documentNumber;
         this.typeClient = typeClient.getNumber();
         this.password = password;
+        addProfile(ProfileUserEnum.CLIENT);
     }
 
     public ClientEntity(Integer id, String name, String email, String password){
@@ -77,6 +85,7 @@ public class ClientEntity implements Serializable {
         this.documentNumber = null;
         this.typeClient = null;
         this.password = password;
+        addProfile(ProfileUserEnum.CLIENT);
     }
 
     public TypeClientEnum getTypeClient() {
@@ -85,6 +94,14 @@ public class ClientEntity implements Serializable {
 
     public void setTypeClient(TypeClientEnum typeClient) {
         this.typeClient = typeClient.getNumber();
+    }
+
+    public Set<ProfileUserEnum> getProfileList() {
+        return profileList.stream().map(profile -> ProfileUserEnum.toEnum(profile)).collect(Collectors.toSet());
+    }
+
+    public void addProfile(ProfileUserEnum profile){
+        profileList.add(profile.getNumber());
     }
 
     public Set<String> getPhonesList() {

@@ -11,6 +11,7 @@ import com.treinamento.EcommerceBackend.entities.OrderItemEntity;
 import com.treinamento.EcommerceBackend.entities.PaymentEntity;
 import com.treinamento.EcommerceBackend.entities.ProductEntity;
 import com.treinamento.EcommerceBackend.entities.StateEntity;
+import com.treinamento.EcommerceBackend.entities.enums.ProfileUserEnum;
 import com.treinamento.EcommerceBackend.entities.enums.StatusPaymentEnum;
 import com.treinamento.EcommerceBackend.entities.enums.TypeClientEnum;
 import com.treinamento.EcommerceBackend.repositories.AdressRepository;
@@ -111,6 +112,7 @@ public class DatabaseService {
         ClientEntity client1 = new ClientEntity("Maria", "srtaespartana@gmail.com", "20828520089", TypeClientEnum.PHYSICAL_PERSON, passwordEncoder.encode("izabela"));
         ClientEntity client2 = new ClientEntity("Clara", "soares.izabelamaria@gmail.com", "154892940003", TypeClientEnum.PHYSICAL_PERSON, passwordEncoder.encode("izabela"));
         ClientEntity client3 = new ClientEntity("Maria Clara", "iza_dvs@hotmail.com", "95195177074", TypeClientEnum.PHYSICAL_PERSON, passwordEncoder.encode("izabela"));
+        client3.addProfile(ProfileUserEnum.ADMIN);
 
         client1.getPhonesList().add("47992880516");
         client1.getPhonesList().add("4733342637");
