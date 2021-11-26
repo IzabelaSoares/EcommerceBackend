@@ -5,18 +5,31 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+
+import javax.mail.internet.MimeMessage;
 
 public class SmtpEmailService extends AbstractEmailService{
 
     @Autowired
     private MailSender mailSender;
 
-    private static final Logger LOG = LoggerFactory.getLogger(MockEmailService.class);
+    @Autowired
+    private JavaMailSender javaMailSender;
+
+    private static final Logger LOG = LoggerFactory.getLogger(SmtpEmailService.class);
 
     @Override
     public void sendMail(SimpleMailMessage mailMessage) {
         LOG.info("Sending a mail");
         mailSender.send(mailMessage);
+        LOG.info("Email sent!");
+    }
+
+    @Override
+    public void sendHtmlEmail(MimeMessage htmlMessage) {
+        LOG.info("Sending a mail");
+        javaMailSender.send(htmlMessage);
         LOG.info("Email sent!");
     }
 }
