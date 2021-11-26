@@ -1,6 +1,8 @@
 package com.treinamento.EcommerceBackend.config;
 
 import com.treinamento.EcommerceBackend.services.DatabaseService;
+import com.treinamento.EcommerceBackend.services.EmailService;
+import com.treinamento.EcommerceBackend.services.SmtpEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -30,6 +32,9 @@ public class DevConfig {
         }
     }
 
-
+    @Bean
+    public EmailService emailService(){
+        return new SmtpEmailService();
+    }
 
 }
