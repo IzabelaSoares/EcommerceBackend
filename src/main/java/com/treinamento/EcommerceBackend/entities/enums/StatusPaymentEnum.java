@@ -1,9 +1,9 @@
 package com.treinamento.EcommerceBackend.entities.enums;
 
 public enum StatusPaymentEnum {
-    PENDENTE(1, "Pendente"),
-    QUITADO(2, "Quitado"),
-    CANCELADO(3, "Cancelado");
+    PENDING(1, "Pending"),
+    SETTLED(2, "Settled"),
+    CANCELED(3, "Cancelled");
 
     private int number;
     private String description;
@@ -30,6 +30,6 @@ public enum StatusPaymentEnum {
                 return x;
             }
         }
-        throw new IllegalArgumentException("Tipo de Status de Pagamento Não Registrado");
+        throw new IllegalArgumentException("Payment Status "+ codigo +" not found!");
     }
 }

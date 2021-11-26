@@ -52,7 +52,7 @@ public class OrderService {
         order.setId(null);
         order.setInstant(new Date());
         order.setClient(clientService.findById(order.getClient().getId()));
-        order.getPayment().setStatus(StatusPaymentEnum.PENDENTE);
+        order.getPayment().setStatus(StatusPaymentEnum.PENDING);
         order.getPayment().setOrder(order);
         //payment
         if(order.getPayment() instanceof BankSlipPaymentEntity){

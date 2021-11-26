@@ -108,9 +108,9 @@ public class DatabaseService {
         CityEntity city6 = new CityEntity("Bombinhas", state3);
         cityRepository.saveAll(Arrays.asList(city1, city2, city3, city4, city5, city6));
 
-        ClientEntity client1 = new ClientEntity("Maria", "srtaespartana@gmail.com", "20828520089", TypeClientEnum.PESSOA_FISICA, passwordEncoder.encode("izabela"));
-        ClientEntity client2 = new ClientEntity("Clara", "soares.izabelamaria@gmail.com", "154892940003", TypeClientEnum.PESSOA_FISICA, passwordEncoder.encode("izabela"));
-        ClientEntity client3 = new ClientEntity("Maria Clara", "iza_dvs@hotmail.com", "95195177074", TypeClientEnum.PESSOA_FISICA, passwordEncoder.encode("izabela"));
+        ClientEntity client1 = new ClientEntity("Maria", "srtaespartana@gmail.com", "20828520089", TypeClientEnum.PHYSICAL_PERSON, passwordEncoder.encode("izabela"));
+        ClientEntity client2 = new ClientEntity("Clara", "soares.izabelamaria@gmail.com", "154892940003", TypeClientEnum.PHYSICAL_PERSON, passwordEncoder.encode("izabela"));
+        ClientEntity client3 = new ClientEntity("Maria Clara", "iza_dvs@hotmail.com", "95195177074", TypeClientEnum.PHYSICAL_PERSON, passwordEncoder.encode("izabela"));
 
         client1.getPhonesList().add("47992880516");
         client1.getPhonesList().add("4733342637");
@@ -134,13 +134,13 @@ public class DatabaseService {
         OrderEntity order2 = new OrderEntity(dateFormat.parse("10/10/2017 19:35"), client2, address3);
         OrderEntity order3 = new OrderEntity(dateFormat.parse("11/11/2017 12:15"), client1, address2);
 
-        PaymentEntity payment1 = new CreditCardPaymentEntity(StatusPaymentEnum.QUITADO, order1, 6);
+        PaymentEntity payment1 = new CreditCardPaymentEntity(StatusPaymentEnum.SETTLED, order1, 6);
         order1.setPayment(payment1);
 
-        PaymentEntity payment2 = new BankSlipPaymentEntity(StatusPaymentEnum.PENDENTE, order2,dateFormat.parse("10/12/2017 00:00"), null );
+        PaymentEntity payment2 = new BankSlipPaymentEntity(StatusPaymentEnum.PENDING, order2,dateFormat.parse("10/12/2017 00:00"), null );
         order2.setPayment(payment2);
 
-        PaymentEntity payment3 = new CreditCardPaymentEntity(StatusPaymentEnum.CANCELADO, order3, 2);
+        PaymentEntity payment3 = new CreditCardPaymentEntity(StatusPaymentEnum.CANCELED, order3, 2);
         order3.setPayment(payment3);
 
         client2.getOrderList().addAll(Arrays.asList(order1, order2));

@@ -25,11 +25,11 @@ public class ClientInsertValidator implements ConstraintValidator<ClientInsert, 
         List<FieldMessageError> list = new ArrayList<>();
 
         //teste cpf
-        if(clientNewDTO.getTypeClient().equals(TypeClientEnum.PESSOA_FISICA.getNumber()) && !DocumentUtils.isValidCPF(clientNewDTO.getDocumentNumber())) {
+        if(clientNewDTO.getTypeClient().equals(TypeClientEnum.PHYSICAL_PERSON.getNumber()) && !DocumentUtils.isValidCPF(clientNewDTO.getDocumentNumber())) {
             list.add(new FieldMessageError("documentNumber","CPF Invalid!"));
         }
         //teste cnpj
-        if(clientNewDTO.getTypeClient().equals(TypeClientEnum.PESSOA_JURIDICA) && !DocumentUtils.isValidCNPJ(clientNewDTO.getDocumentNumber())){
+        if(clientNewDTO.getTypeClient().equals(TypeClientEnum.LEGAL_PERSON) && !DocumentUtils.isValidCNPJ(clientNewDTO.getDocumentNumber())){
             list.add(new FieldMessageError("documentNumber","CNPJ Invalid!"));
         }
         //teste email

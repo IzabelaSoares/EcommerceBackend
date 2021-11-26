@@ -2,8 +2,8 @@ package com.treinamento.EcommerceBackend.entities.enums;
 
 
 public enum TypeClientEnum {
-    PESSOA_FISICA(1, "Pessoa Fisica"),
-    PESSOA_JURIDICA(2, "Pessoa Juridica");
+    PHYSICAL_PERSON(1, "Physical Person"),
+    LEGAL_PERSON(2, "Legal Person");
 
     private int number;
     private String description;
@@ -30,6 +30,6 @@ public enum TypeClientEnum {
                 return x;
             }
         }
-        throw new IllegalArgumentException("Tipo de Pessoa Não Registrada");
+        throw new IllegalArgumentException("Person type "+ codigo +" not found!");
     }
 }
