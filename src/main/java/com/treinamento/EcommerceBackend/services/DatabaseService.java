@@ -23,6 +23,7 @@ import com.treinamento.EcommerceBackend.repositories.PaymentRepository;
 import com.treinamento.EcommerceBackend.repositories.ProductRepository;
 import com.treinamento.EcommerceBackend.repositories.StateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -58,6 +59,9 @@ public class DatabaseService {
 
     @Autowired
     private OrderItemRepository orderItemRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     public void instantiateTestDatabase() throws ParseException {
 
@@ -104,10 +108,9 @@ public class DatabaseService {
         CityEntity city6 = new CityEntity("Bombinhas", state3);
         cityRepository.saveAll(Arrays.asList(city1, city2, city3, city4, city5, city6));
 
-        ClientEntity client1 = new ClientEntity("Maria", "maria@gmail.com", "103.620.968-22", TypeClientEnum.PESSOA_FISICA);
-        ClientEntity client2 = new ClientEntity("Clara", "soares.izabelamaria@gmail.com", "104.620.964-23", TypeClientEnum.PESSOA_FISICA);
-        ClientEntity client3 = new ClientEntity("Maria Clara", "mariaclara@gmail.com", "107.520.968-24", TypeClientEnum.PESSOA_FISICA);
-
+        ClientEntity client1 = new ClientEntity("Maria", "srtaespartana@gmail.com", "20828520089", TypeClientEnum.PESSOA_FISICA, passwordEncoder.encode("izabela"));
+        ClientEntity client2 = new ClientEntity("Clara", "soares.izabelamaria@gmail.com", "154892940003", TypeClientEnum.PESSOA_FISICA, passwordEncoder.encode("izabela"));
+        ClientEntity client3 = new ClientEntity("Maria Clara", "iza_dvs@hotmail.com", "95195177074", TypeClientEnum.PESSOA_FISICA, passwordEncoder.encode("izabela"));
 
         client1.getPhonesList().add("47992880516");
         client1.getPhonesList().add("4733342637");

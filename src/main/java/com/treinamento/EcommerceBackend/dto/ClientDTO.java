@@ -1,5 +1,6 @@
 package com.treinamento.EcommerceBackend.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.treinamento.EcommerceBackend.entities.ClientEntity;
 import com.treinamento.EcommerceBackend.services.validations.ClientUpdate;
 import org.hibernate.validator.constraints.Length;
@@ -15,6 +16,9 @@ public class ClientDTO implements Serializable {
     @NotEmpty(message = "Preenchimento obrigatório!")
     @Email(message = "Email inválid!")
     private String email;
+
+    @NotEmpty(message = "Preenchimento obrigatório!")
+    private String password;
 
     @NotEmpty(message = "Preenchimento obrigatório!")
     @Length(min=5, max = 120, message = "O nome do cliente deve conter no mínimo 5 e no máximo 120 caracteres!")
@@ -53,4 +57,12 @@ public class ClientDTO implements Serializable {
         this.email = email;
     }
 
+    @JsonIgnore
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

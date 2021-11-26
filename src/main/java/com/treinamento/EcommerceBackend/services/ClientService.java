@@ -16,6 +16,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
@@ -23,6 +24,9 @@ import java.util.Optional;
 
 @Service
 public class ClientService {
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     private ClientRepository clientRepository;
@@ -70,13 +74,13 @@ public class ClientService {
     }
 
     public ClientEntity convertClientDTO(ClientDTO clientDTO){
-        ClientEntity client = new ClientEntity(clientDTO.getId(), clientDTO.getName(), clientDTO.getEmail());
+        ClientEntity client = new ClientEntity(clientDTO.getId(), clientDTO.getName(), clientDTO.getEmail(), null);
         return client;
     }
 
     public ClientEntity convertClientDTO(ClientNewDTO clientNewDTO){
         ClientEntity client = new ClientEntity(clientNewDTO.getName(), clientNewDTO.getEmail(),
-                clientNewDTO.getDocumentNumber(), TypeClientEnum.toEnum(clientNewDTO.getTypeClient()));
+                clientNewDTO.getDocumentNumber(), TypeClientEnum.toEnum(clientNewDTO.getTypeClient()), passwordEncoder.encode(clientNewDTO.getPassword()));
         CityEntity city = new CityEntity(clientNewDTO.getCityId(), null,null);
         AddressEntity address = new AddressEntity(clientNewDTO.getStreet(), clientNewDTO.getNumber(), clientNewDTO.getDistrict(),
                  clientNewDTO.getCode(), clientNewDTO.getComplement(),city, client);

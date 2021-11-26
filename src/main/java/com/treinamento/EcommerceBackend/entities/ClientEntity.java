@@ -30,6 +30,10 @@ public class ClientEntity implements Serializable {
 
     private String email;
 
+    @JsonIgnore
+    private String password;
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -57,20 +61,22 @@ public class ClientEntity implements Serializable {
     public ClientEntity() {
     }
 
-    public ClientEntity(String name, String email, String documentNumber, TypeClientEnum typeClient) {
+    public ClientEntity(String name, String email, String documentNumber, TypeClientEnum typeClient, String password) {
         this.id = null;
         this.name = name;
         this.email = email;
         this.documentNumber = documentNumber;
         this.typeClient = typeClient.getNumber();
+        this.password = password;
     }
 
-    public ClientEntity(Integer id, String name, String email) {
+    public ClientEntity(Integer id, String name, String email, String password){
         this.id = id;
         this.name = name;
         this.email = email;
         this.documentNumber = null;
         this.typeClient = null;
+        this.password = password;
     }
 
     public TypeClientEnum getTypeClient() {
@@ -119,6 +125,14 @@ public class ClientEntity implements Serializable {
 
     public void setDocumentNumber(String documentNumber) {
         this.documentNumber = documentNumber;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public List<OrderEntity> getOrderList() {
