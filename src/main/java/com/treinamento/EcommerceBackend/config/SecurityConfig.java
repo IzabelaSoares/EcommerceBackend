@@ -2,6 +2,7 @@ package com.treinamento.EcommerceBackend.config;
 
 import com.treinamento.EcommerceBackend.resources.utils.Url;
 import com.treinamento.EcommerceBackend.security.JWTAuthenticationFilter;
+import com.treinamento.EcommerceBackend.security.JWTAuthorizationFilter;
 import com.treinamento.EcommerceBackend.security.JWTUtil;
 import com.treinamento.EcommerceBackend.services.UserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll().
                 anyRequest().authenticated();
         http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
+        http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
