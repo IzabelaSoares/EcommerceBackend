@@ -18,6 +18,6 @@ public class EcommerceBackendApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		s3Service.uploadFile("C:\\Users\\Izabela Alves\\Pictures\\Planet9\\teste.jpg");
+
 	}
 }

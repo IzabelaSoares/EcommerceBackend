@@ -1,6 +1,10 @@
 package com.treinamento.EcommerceBackend.resources.exceptions;
+import com.amazonaws.AmazonClientException;
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.services.s3.model.AmazonS3Exception;
 import com.treinamento.EcommerceBackend.services.exceptions.DataIntegrityException;
 import com.treinamento.EcommerceBackend.services.exceptions.DatabaseException;
+import com.treinamento.EcommerceBackend.services.exceptions.FileException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AuthorizationServiceException;
@@ -45,7 +49,30 @@ public class ResourceExceptionHandler {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
     }
 
+    @ExceptionHandler(FileException.class)
+    public ResponseEntity<StandardError> file(FileException e, HttpServletRequest request) {
+        StandardError error = new StandardError(Instant.now(), HttpStatus.BAD_REQUEST.value(), e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
 
+    @ExceptionHandler(AmazonServiceException.class)
+    public ResponseEntity<StandardError> amazonService(AmazonServiceException e, HttpServletRequest request) {
+        HttpStatus code = HttpStatus.valueOf(e.getErrorCode());
+        StandardError error = new StandardError(Instant.now(), code.value(), e.getMessage());
+        return ResponseEntity.status(code).body(error);
+    }
+
+    @ExceptionHandler(AmazonClientException.class)
+    public ResponseEntity<StandardError> amazonClient(AmazonClientException e, HttpServletRequest request) {
+        StandardError error = new StandardError(Instant.now(), HttpStatus.BAD_REQUEST.value(), e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+    @ExceptionHandler(AmazonS3Exception.class)
+    public ResponseEntity<StandardError> amazonS3(AmazonS3Exception e, HttpServletRequest request) {
+        StandardError error = new StandardError(Instant.now(), HttpStatus.BAD_REQUEST.value(), e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
 
 
 }

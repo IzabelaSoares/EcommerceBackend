@@ -28,8 +28,9 @@ import java.util.stream.Collectors;
 @Table(name = "Client", uniqueConstraints ={ @UniqueConstraint(name = "UkDocument", columnNames ="documentNumber"),
         @UniqueConstraint(name = "UkEmail", columnNames = {"email"})})
 public class ClientEntity implements Serializable {
-
     private static final long serialVersionUID = 1;
+
+    //private String imageUrl; Removido para seguir a estratégia de salvar imagens em nomenclatura
 
     private String email;
 
@@ -155,7 +156,15 @@ public class ClientEntity implements Serializable {
     public List<OrderEntity> getOrderList() {
         return orderList;
     }
+/*
+    public String getImageUrl() {
+        return imageUrl;
+    }
 
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+*/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
