@@ -45,6 +45,12 @@ public class ClientResource {
         return ResponseEntity.ok().body(client);
     }
 
+    @GetMapping(value="/email")
+    public ResponseEntity<ClientEntity> find(@RequestParam(value="value") String email) {
+        ClientEntity obj = clientService.findByEmail(email);
+        return ResponseEntity.ok().body(obj);
+    }
+
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping(value = "/page")
     public ResponseEntity<Page<ClientDTO>> findPage(

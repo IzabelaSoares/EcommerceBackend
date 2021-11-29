@@ -73,6 +73,21 @@ public class ClientService {
         return client.orElseThrow(() -> new DatabaseException(id));
     }
 
+    public ClientEntity findByEmail(String email) {
+        UserSS user = UserService.authenticated();
+        if (user == null || !user.hasRole(ProfileUserEnum.ADMIN) && !email.equals(user.getUsername())) {
+            throw new AuthorizationException("Access denied!");
+        }
+
+        ClientEntity client = clientRepository.findByEmail(email);
+        if (client == null) {
+            throw new DatabaseException(
+                    "Object not found! Id: " + user.getId() + ", Type: " + ClientEntity.class.getName());
+        }
+        return client;
+    }
+
+
     @Transactional
     public ClientEntity insert(ClientEntity client) {
         client.setId(null);
